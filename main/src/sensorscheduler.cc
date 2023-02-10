@@ -22,7 +22,13 @@ SensorScheduler::SensorScheduler()
   }
 
   /*PIR Sensor Routine Will be called here*/
-  adc2_config_channel_atten(PIR_PIN, PIR_RES);
+  // adc2_config_channel_atten(PIR_PIN, PIR_RES);
+  // adc2_config_channel_atten(ADC2_CHANNEL_7, ADC_ATTEN_DB_0);
+  adc1_config_width(ADC1_RES);
+  adc1_config_channel_atten(PIR_PIN, PIR_ATTEN);
+  printf("PIR Configured\n");
+  adc1_config_channel_atten(MW_PIN, MW_ATTEN);
+  printf("MW Configured\n");
 }
 
 // Sensor tasks
@@ -50,14 +56,15 @@ void SensorScheduler::bme_680_polling_task(void* pvParameters)
 
 void SensorScheduler::pir_polling_task(void* pvParameters)
 {
-  int value = rand() % 10;
+  int pir, mw;
 
   while (1)
   {
-    adc2_get_raw(PIR_PIN, ADC_WIDTH_BIT_12, &value);
-    printf("Analog value from IO27: %d\n", value);
+    pir = adc1_get_raw(PIR_PIN);
+    mw = adc1_get_raw(MW_PIN);
+    printf("PIR: %d\tMW: %d\n", pir, mw);
 
-    vTaskDelay(pdMS_TO_TICKS(500));
+    vTaskDelay(pdMS_TO_TICKS(100));
   }
 }
 

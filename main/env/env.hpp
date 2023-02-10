@@ -9,7 +9,10 @@
 #define     I2C_SCL_PIN GPIO_NUM_22
 #define     I2C_SDA_PIN GPIO_NUM_21
 #define     I2C_FREQ I2C_FREQ_100K
-#define     PIR_PIN ADC2_CHANNEL_7
-#define     PIR_RES ADC_ATTEN_DB_0
+#define     ADC1_RES ADC_WIDTH_BIT_12
+#define     PIR_PIN ADC1_CHANNEL_6
+#define     PIR_ATTEN ADC_ATTEN_DB_0
+#define     MW_PIN ADC1_CHANNEL_7
+#define     MW_ATTEN ADC_ATTEN_DB_0
 
 #endif

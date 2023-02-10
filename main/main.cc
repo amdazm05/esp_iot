@@ -8,6 +8,7 @@ extern "C"
 {
   void app_main(void)
   {
+
     // Anable security sensor
     char SSID[32] = "ahmedazeem";
     char PWD[64] = "abcdefghi";
