@@ -16,20 +16,19 @@ static void (*uriMethodHandlerCallback)(std::string & value1, std::string &value
 
 static esp_err_t methodHandler(httpd_req_t* httpRequest)
 {
+   wifiConfigurationHTMLString = std::string(wifiConfigurationHTML);
     ESP_LOGI("HTTP_URIHANDLERS_TAG","This is the handler for the <%s> URI", httpRequest->uri);
     std::vector<std::string> token = {};
     seperate_token_from_uri((char *)httpRequest->uri,token);
     split_token_key_value_serialise(token,TokenVector);
+    std::vector<std::string> strings = stawifimode::get_list_of_ssids();
+    addScansToHtml(strings);
     if(TokenVector.size()>0)
     {
-        // esp_netif_destroy(WifiConfigurator::p_netif);
         stawifimode::switch_to_sta_mode(TokenVector[0].value,TokenVector[1].value);
-        // uriMethodHandlerCallback(TokenVector[0].value,TokenVector[1].value);
         ESP_LOGI("HTTP_URIHANDLERS_TAG","SSID  %s - %s", TokenVector[0].key.data(),TokenVector[0].value.data());
         ESP_LOGI("HTTP_URIHANDLERS_TAG","PASS  %s - %s", TokenVector[1].key.data(),TokenVector[1].value.data());
-        // if(!uriMethodHandlerCallback)
-        // {
-        // }
+        ESP_LOGI("HTTP_URIHANDLERS_TAG","EMAIL  %s - %s", TokenVector[2].key.data(),TokenVector[2].value.data());
     }
 
     httpd_resp_send(httpRequest,wifiConfigurationHTML,HTTPD_RESP_USE_STRLEN);
