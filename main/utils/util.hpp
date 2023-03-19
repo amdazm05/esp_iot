@@ -23,6 +23,9 @@
 // HTTP Server include 
 #include "esp_http_server.h"
 
+//HTTP client includes
+#include "esp_http_client.h"
+
 // GPIO library
 #include "driver/i2c.h"
 
@@ -35,5 +38,11 @@
 #include <string>
 #include <vector>
 #include <string.h>
+
+//LWIP includes 
+#include "lwip/err.h"
+#include "lwip/sockets.h"
+#include "lwip/sys.h"
+#include "lwip/netdb.h"
 
 #endif //_UTILS
