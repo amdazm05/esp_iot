@@ -7,11 +7,12 @@ class StorageHandler
 {
     public:
         static void init();
+        static void erase_nvs();
         static StorageHandler * get_instance();
-        void write_to_nvs(std::string & key,std::string & value);
-        std::size_t read_from_nvs(std::string & value);
+        static void write_to_nvs(std::string & key,std::string & value);
+        static std::size_t read_from_nvs(std::string& key,std::string& value);
     private:
-        nvs_handle handle;
+        static nvs_handle handle;
         StorageHandler();
         static StorageHandler * _inst;
 };
